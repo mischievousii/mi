@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>not ready yet — mischievous playground</title>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+body{
+  background:#f2f0ec;
+  font-family:'Indie Flower','Nunito',cursive;
+  color:#2d2d2d;
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor:none;
+  /* subtle grid */
+  background-image:
+    linear-gradient(rgba(200,220,255,.07) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(200,220,255,.07) 1px,transparent 1px);
+  background-size:28px 28px;
+}
+
+#cur{position:fixed;width:20px;height:20px;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;
+  padding:20px 40px;
+  position:relative;z-index:10;
+}
+.nav-brand{display:flex;flex-direction:column;text-decoration:none;color:inherit;margin-right:auto;}
+.nav-title{font-size:17px;font-weight:800;display:flex;align-items:center;gap:6px;}
+.nav-title .ht{color:#f4a7b9;font-size:14px;}
+.nav-sub{font-size:11px;color:#bbb;margin-top:1px;}
+.nav-links{display:flex;gap:32px;}
+.nav-links a{
+  font-family:'Indie Flower',cursive;font-size:16px;color:#555;
+  text-decoration:none;position:relative;padding-bottom:3px;transition:color .2s;
+}
+.nav-links a::after{content:'';position:absolute;bottom:0;left:0;width:100%;height:2.5px;border-radius:2px;transform:scaleX(0);transition:transform .25s;transform-origin:left;}
+.nav-links a:nth-child(1)::after{background:#f4a7b9;}
+.nav-links a:nth-child(2)::after{background:#a8c8e8;}
+.nav-links a:nth-child(3)::after{background:#a8d8a8;}
+.nav-links a:nth-child(4)::after{background:#c9a6e8;}
+.nav-links a:hover::after,.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a:hover,.nav-links a.active{color:#222;}
+.nav-right{display:flex;align-items:center;gap:14px;margin-left:32px;}
+.sticky-nav{
+  width:115px;background:#fffde7;border:1px solid rgba(0,0,0,.07);
+  padding:10px 12px 14px;box-shadow:2px 3px 8px rgba(0,0,0,.09);
+  transform:rotate(1.5deg);font-size:13px;font-weight:700;color:#666;
+  line-height:1.5;position:relative;transition:transform .2s;cursor:none;
+}
+.sticky-nav::before{content:'';position:absolute;top:-8px;left:10px;width:32px;height:13px;border-radius:2px;background:rgba(201,166,232,.5);}
+.sticky-nav:hover{transform:rotate(0deg) scale(1.04);}
+.sticky-nav .arr{color:#f4a7b9;font-size:16px;display:block;margin-top:4px;}
+.nav-circle{width:30px;height:30px;border:2px solid #ccc;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:14px;color:#ccc;transition:transform .3s,border-color .3s;}
+.nav-circle:hover{transform:rotate(20deg);border-color:#f4a7b9;color:#f4a7b9;}
+
+/* ── MAIN AREA ── */
+.main{
+  min-height:calc(100vh - 90px);
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  padding:20px 40px 60px;
+  position:relative;
+}
+
+/* ── TORN PAPER ── */
+.paper{
+  background:white;
+  padding:44px 56px 52px;
+  position:relative;
+  max-width:600px;
+  width:100%;
+  text-align:center;
+  box-shadow:2px 4px 18px rgba(0,0,0,.07);
+  transform:rotate(-0.8deg);
+  /* torn edges top & bottom */
+  clip-path:polygon(
+    0 4%,1% 0,2% 4%,3% 1%,4% 5%,5% 1%,6% 5%,7% 1%,8% 4%,9% 0,10% 4%,
+    11% 1%,12% 5%,13% 1%,14% 4%,15% 0,16% 4%,17% 1%,18% 5%,19% 1%,20% 4%,
+    21% 0,22% 4%,23% 1%,24% 5%,25% 0,26% 4%,27% 1%,28% 5%,29% 1%,30% 4%,
+    31% 0,32% 5%,33% 1%,34% 4%,35% 0,36% 4%,37% 1%,38% 5%,39% 1%,40% 4%,
+    41% 0,42% 4%,43% 1%,44% 5%,45% 0,46% 4%,47% 1%,48% 5%,49% 1%,50% 4%,
+    51% 0,52% 4%,53% 1%,54% 5%,55% 0,56% 4%,57% 1%,58% 5%,59% 1%,60% 4%,
+    61% 0,62% 4%,63% 1%,64% 5%,65% 0,66% 4%,67% 1%,68% 5%,69% 1%,70% 4%,
+    71% 0,72% 4%,73% 1%,74% 5%,75% 0,76% 4%,77% 1%,78% 5%,79% 1%,80% 4%,
+    81% 0,82% 4%,83% 1%,84% 5%,85% 0,86% 4%,87% 1%,88% 5%,89% 1%,90% 4%,
+    91% 0,92% 4%,93% 1%,94% 5%,95% 0,96% 4%,97% 1%,98% 4%,99% 1%,100% 4%,
+    100% 94%,99% 98%,98% 94%,97% 99%,96% 95%,95% 100%,94% 96%,93% 100%,92% 95%,91% 99%,
+    90% 94%,89% 98%,88% 94%,87% 100%,86% 95%,85% 99%,84% 94%,83% 98%,82% 94%,81% 99%,
+    80% 95%,79% 100%,78% 95%,77% 99%,76% 94%,75% 98%,74% 95%,73% 100%,72% 95%,71% 99%,
+    70% 94%,69% 98%,68% 95%,67% 100%,66% 95%,65% 99%,64% 94%,63% 98%,62% 95%,61% 99%,
+    60% 94%,59% 98%,58% 95%,57% 100%,56% 95%,55% 99%,54% 94%,53% 98%,52% 95%,51% 99%,
+    50% 94%,49% 98%,48% 95%,47% 100%,46% 95%,45% 99%,44% 94%,43% 98%,42% 95%,41% 99%,
+    40% 94%,39% 98%,38% 95%,37% 100%,36% 95%,35% 99%,34% 94%,33% 98%,32% 95%,31% 99%,
+    30% 94%,29% 98%,28% 95%,27% 100%,26% 95%,25% 99%,24% 94%,23% 98%,22% 95%,21% 99%,
+    20% 94%,19% 98%,18% 95%,17% 100%,16% 95%,15% 99%,14% 94%,13% 98%,12% 95%,11% 99%,
+    10% 94%,9% 98%,8% 95%,7% 100%,6% 95%,5% 99%,4% 94%,3% 98%,2% 95%,1% 99%,0 94%
+  );
+  /* grid pattern inside paper */
+  background-image:
+    linear-gradient(rgba(180,210,255,.12) 1px,transparent 1px),
+    linear-gradient(90deg,rgba(180,210,255,.12) 1px,transparent 1px);
+  background-size:22px 22px;
+  background-color:white;
+}
+
+/* gingham tape top center */
+.tape-top{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%);
+  width:88px;height:22px;border-radius:3px;
+  background:
+    repeating-linear-gradient(45deg,rgba(244,167,185,.65) 0,rgba(244,167,185,.65) 3px,rgba(255,220,228,.5) 3px,rgba(255,220,228,.5) 6px);
+  opacity:.85;
+}
+
+.paper-title{
+  font-size:52px;font-weight:800;
+  color:#1a1a1a;line-height:1.1;
+  margin-bottom:18px;
+  /* dash lines left */
+  position:relative;
+}
+/* little lines before title */
+.paper-title::before{
+  content:'';position:absolute;left:-12px;top:50%;transform:translateY(-50%);
+  width:8px;height:2px;background:#aaa;border-radius:2px;
+  box-shadow:0 -6px 0 #aaa, 0 6px 0 #aaa;
+}
+
+.paper-body{
+  font-size:20px;color:#555;line-height:1.65;
+  margin-bottom:22px;
+}
+/* highlight "under construction" */
+.highlight{
+  background:#ffd97d;
+  padding:1px 4px;border-radius:3px;
+  color:#555;
+}
+
+/* purple washi + note */
+.note-wrap{position:relative;display:inline-block;margin-top:4px;}
+.note-washi{
+  position:absolute;top:-9px;left:50%;transform:translateX(-50%);
+  width:50px;height:14px;border-radius:2px;
+  background:repeating-linear-gradient(90deg,rgba(168,200,232,.6) 0,rgba(168,200,232,.35) 4px,rgba(168,200,232,.6) 8px);
+  opacity:.7;
+}
+.note{
+  background:#e8d8ff;
+  padding:10px 24px 12px;
+  border-radius:6px;
+  font-size:17px;font-weight:700;color:#666;
+  display:inline-block;
+  position:relative;
+}
+
+/* star doodle top-right of paper */
+.paper-star{
+  position:absolute;top:20px;right:24px;
+  animation:spin 8s linear infinite;
+}
+@keyframes spin{0%{transform:rotate(0deg);}100%{transform:rotate(360deg);}}
+
+/* ── SCATTERED DOODLES ── */
+.doodle{
+  position:absolute;pointer-events:none;user-select:none;
+  animation:dfloat var(--dur,4s) ease-in-out infinite;
+  animation-delay:var(--del,0s);
+}
+@keyframes dfloat{0%,100%{transform:translateY(0) rotate(var(--r,0deg));}50%{transform:translateY(-8px) rotate(var(--r,0deg));}}
+
+/* cat peek right */
+.cat-area{
+  position:absolute;
+  right:80px;top:80px;
+  display:flex;flex-direction:column;align-items:flex-start;
+  pointer-events:none;
+}
+.cat-speech-up{
+  background:white;border:2px solid #2d2d2d;border-radius:16px;
+  padding:8px 14px;font-size:13px;font-weight:700;
+  white-space:nowrap;position:relative;margin-bottom:6px;margin-left:8px;
+  animation:wobble 5s ease-in-out infinite;
+}
+@keyframes wobble{0%,100%{transform:rotate(-1deg);}50%{transform:rotate(1.5deg);}}
+.cat-speech-up::after{content:'';position:absolute;bottom:-12px;right:18px;border:7px solid transparent;border-top-color:#2d2d2d;}
+.cat-speech-up::before{content:'';position:absolute;bottom:-7px;right:20px;border:5px solid transparent;border-top-color:white;z-index:1;}
+
+/* curly arrow left */
+.curly-arrow{
+  position:absolute;left:100px;top:55%;
+  pointer-events:none;
+  animation:dfloat 5s ease-in-out infinite;
+  animation-delay:.5s;
+}
+
+/* sticky notes */
+.sticky-bl{
+  position:absolute;bottom:80px;left:60px;
+  width:140px;background:#fde8ee;
+  border:1px solid rgba(0,0,0,.07);
+  padding:14px 14px 18px;
+  box-shadow:3px 4px 10px rgba(0,0,0,.09);
+  transform:rotate(-2deg);
+  font-size:14px;font-weight:700;color:#888;
+  line-height:1.6;
+}
+.sticky-bl::before{
+  content:'';position:absolute;top:-8px;left:12px;
+  width:42px;height:14px;border-radius:2px;
+  background:repeating-linear-gradient(90deg,rgba(255,200,180,.7) 0,rgba(255,200,180,.4) 4px,rgba(255,200,180,.7) 8px);
+}
+.sticky-bl .s-heart{color:#f4a7b9;}
+
+.sticky-br{
+  position:absolute;bottom:80px;right:60px;
+  width:150px;background:#fafaf0;
+  border:1px solid rgba(0,0,0,.07);
+  padding:14px 14px 18px;
+  box-shadow:3px 4px 10px rgba(0,0,0,.09);
+  transform:rotate(1.5deg);
+  font-size:14px;font-weight:700;color:#888;
+  line-height:1.6;
+}
+.sticky-br::before{
+  content:'';position:absolute;top:-8px;right:12px;
+  width:38px;height:14px;border-radius:2px;
+  background:repeating-linear-gradient(90deg,rgba(168,216,168,.7) 0,rgba(168,216,168,.4) 4px,rgba(168,216,168,.7) 8px);
+}
+.sticky-br .s-heart{color:#c9a6e8;}
+
+/* ── BOTTOM ACTIONS ── */
+.actions{
+  display:flex;flex-direction:column;align-items:center;
+  gap:14px;
+  margin-top:32px;
+  position:relative;z-index:2;
+}
+
+.random-btn{
+  font-family:'Indie Flower',cursive;
+  font-size:18px;font-weight:700;color:#333;
+  background:white;
+  border:2px solid #2d2d2d;
+  border-radius:40px;
+  padding:14px 36px;
+  display:flex;align-items:center;gap:10px;
+  cursor:none;
+  transition:transform .22s,box-shadow .22s;
+  box-shadow:2px 3px 0 rgba(0,0,0,.08);
+}
+.random-btn:hover{transform:translateY(-4px);box-shadow:4px 8px 18px rgba(0,0,0,.1);}
+
+/* little lines beside button */
+.btn-lines{
+  position:absolute;right:-34px;top:50%;transform:translateY(-50%);
+  pointer-events:none;opacity:.5;
+}
+
+.go-home{
+  font-family:'Indie Flower',cursive;
+  font-size:16px;color:#aaa;text-decoration:none;
+  display:flex;align-items:center;gap:6px;
+  transition:color .2s;
+  position:relative;
+}
+.go-home:hover{color:#f4a7b9;}
+/* underline */
+.go-home::after{
+  content:'';position:absolute;bottom:-3px;left:0;right:0;
+  height:2px;background:#c9a6e8;border-radius:2px;opacity:.5;
+}
+
+/* responsive */
+@media(max-width:768px){
+  nav{padding:14px 20px;}
+  .main{padding:20px;}
+  .paper{padding:32px 24px 44px;}
+  .paper-title{font-size:38px;}
+  .cat-area,.sticky-bl,.sticky-br,.curly-arrow{display:none;}
+  .doodle{display:none;}
+}
+</style>
+</head>
+<body>
+
+<div id="cur"><svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4.5" fill="#f4a7b9" opacity=".9"/><circle cx="10" cy="10" r="8" stroke="#f4a7b9" stroke-width="1.4" opacity=".35"/></svg></div>
+
+<!-- NAV -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-title">mischievous playground <span class="ht">♡</span></div>
+    <div class="nav-sub">small things i'm figuring out</div>
+  </a>
+  <div class="nav-links">
+    <a href="zines.html">zines</a>
+    <a href="words.html" id="nav-words">word world</a>
+    <a href="discovery.html" id="nav-disc">discovery</a>
+    <a href="about.html" id="nav-about">about</a>
+  </div>
+  <div class="nav-right">
+    <div class="sticky-nav">take me<br>somewhere<span class="arr">→</span></div>
+    <div class="nav-circle">:)</div>
+  </div>
+</nav>
+
+<!-- MAIN -->
+<div class="main">
+
+  <!-- scattered doodles -->
+  <!-- purple sparkle left -->
+  <div class="doodle" style="left:180px;top:140px;font-size:26px;color:#c9a6e8;--dur:4s;--r:10deg;">✦</div>
+  <!-- pink flower left -->
+  <div class="doodle" style="left:120px;top:310px;--dur:5s;--del:.4s;">
+    <svg width="38" height="38"><circle cx="19" cy="19" r="6" fill="#f4a7b9"/><ellipse cx="19" cy="7" rx="6" ry="7" stroke="#f4a7b9" stroke-width="1.8" fill="white"/><ellipse cx="19" cy="31" rx="6" ry="7" stroke="#f4a7b9" stroke-width="1.8" fill="white"/><ellipse cx="7" cy="19" rx="7" ry="6" stroke="#f4a7b9" stroke-width="1.8" fill="white"/><ellipse cx="31" cy="19" rx="7" ry="6" stroke="#f4a7b9" stroke-width="1.8" fill="white"/></svg>
+  </div>
+  <!-- blue sparkle right -->
+  <div class="doodle" style="right:200px;top:320px;font-size:24px;color:#a8c8e8;--dur:3.5s;--del:.8s;--r:-12deg;">✦</div>
+  <!-- pink heart right -->
+  <div class="doodle" style="right:160px;top:200px;font-size:22px;color:#f4a7b9;--dur:4.5s;--del:.3s;">♡</div>
+  <!-- green heart left -->
+  <div class="doodle" style="left:200px;top:420px;font-size:18px;color:#a8d8a8;--dur:5s;--del:1s;">♡</div>
+  <!-- flower outline right bottom -->
+  <div class="doodle" style="right:240px;top:400px;--dur:4.2s;--del:.6s;">
+    <svg width="34" height="34"><circle cx="17" cy="17" r="4" fill="none" stroke="#ddd" stroke-width="1.5"/><ellipse cx="17" cy="6" rx="4" ry="5" stroke="#ddd" stroke-width="1.5" fill="none"/><ellipse cx="17" cy="28" rx="4" ry="5" stroke="#ddd" stroke-width="1.5" fill="none"/><ellipse cx="6" cy="17" rx="5" ry="4" stroke="#ddd" stroke-width="1.5" fill="none"/><ellipse cx="28" cy="17" rx="5" ry="4" stroke="#ddd" stroke-width="1.5" fill="none"/></svg>
+  </div>
+
+  <!-- curly arrow left -->
+  <div class="curly-arrow">
+    <svg width="60" height="80" viewBox="0 0 60 80" fill="none">
+      <path d="M40 8 Q10 20 20 50 Q30 70 10 75" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round"/>
+      <path d="M6 68 L10 75 L17 70" stroke="#333" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+  </div>
+
+  <!-- cat + speech bubble right -->
+  <div class="cat-area">
+    <div class="cat-speech-up">almost<br>there...</div>
+    <svg width="110" height="76" viewBox="0 0 110 76" fill="none">
+      <ellipse cx="55" cy="82" rx="32" ry="20" fill="#1c1c1c"/>
+      <ellipse cx="55" cy="55" rx="30" ry="28" fill="#1c1c1c"/>
+      <polygon points="30,36 22,12 40,26" fill="#1c1c1c"/>
+      <polygon points="80,36 88,12 70,26" fill="#1c1c1c"/>
+      <polygon points="31,34 24,14 39,25" fill="#c9a6e8" opacity=".5"/>
+      <polygon points="79,34 86,14 71,25" fill="#c9a6e8" opacity=".5"/>
+      <ellipse cx="45" cy="52" rx="6.5" ry="7.5" fill="#ffd97d"/>
+      <ellipse cx="65" cy="52" rx="6.5" ry="7.5" fill="#ffd97d"/>
+      <ellipse cx="45" cy="53" rx="3.8" ry="6" fill="#111"/>
+      <ellipse cx="65" cy="53" rx="3.8" ry="6" fill="#111"/>
+      <circle cx="47" cy="49" r="1.5" fill="white"/>
+      <circle cx="67" cy="49" r="1.5" fill="white"/>
+      <polygon points="55,60 52,64 58,64" fill="#f4a7b9"/>
+      <path d="M51 64.5 Q55 68 59 64.5" stroke="#f4a7b9" stroke-width="1.3" fill="none" stroke-linecap="round"/>
+      <line x1="26" y1="58" x2="45" y2="60" stroke="#888" stroke-width="1" opacity=".5"/>
+      <line x1="26" y1="62" x2="45" y2="61" stroke="#888" stroke-width="1" opacity=".5"/>
+      <line x1="65" y1="60" x2="84" y2="58" stroke="#888" stroke-width="1" opacity=".5"/>
+      <line x1="65" y1="61" x2="84" y2="62" stroke="#888" stroke-width="1" opacity=".5"/>
+    </svg>
+  </div>
+
+  <!-- sticky bottom left -->
+  <div class="sticky-bl">
+    good things<br>take time <span class="s-heart">♡</span>
+  </div>
+
+  <!-- sticky bottom right -->
+  <div class="sticky-br">
+    thank you for<br>your patience ! <span class="s-heart">♡</span>
+  </div>
+
+  <!-- PAPER -->
+  <div class="paper">
+    <div class="tape-top"></div>
+
+    <!-- star spinning -->
+    <div class="paper-star">
+      <svg width="32" height="32"><polygon points="16,2 19,11 28,11 21,17 24,26 16,20 8,26 11,17 4,11 13,11" fill="#ffd97d"/></svg>
+    </div>
+
+    <!-- lines doodle left of title -->
+    <div style="position:absolute;left:20px;top:44px;opacity:.4;">
+      <svg width="20" height="20"><line x1="10" y1="0" x2="4" y2="8" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/><line x1="14" y1="4" x2="8" y2="12" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/><line x1="18" y1="8" x2="12" y2="16" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+    </div>
+
+    <div class="paper-title">not ready yet !</div>
+
+    <div class="paper-body">
+      this page is still <span class="highlight">under construction...</span><br>
+      come back later maybe? ♡
+    </div>
+
+    <div class="note-wrap">
+      <div class="note-washi"></div>
+      <div class="note">working on it slowly :)</div>
+    </div>
+  </div>
+
+  <!-- ACTIONS -->
+  <div class="actions">
+    <div style="position:relative;">
+      <button class="random-btn" onclick="goRandom()">
+        take me somewhere
+        <svg width="22" height="22" viewBox="0 0 22 22"><rect x="2" y="2" width="18" height="18" rx="4" stroke="currentColor" stroke-width="1.8" fill="none"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/><circle cx="15" cy="7" r="1.5" fill="currentColor"/><circle cx="7" cy="15" r="1.5" fill="currentColor"/><circle cx="15" cy="15" r="1.5" fill="currentColor"/><circle cx="11" cy="11" r="1.5" fill="currentColor"/></svg>
+      </button>
+      <!-- lines beside button -->
+      <div class="btn-lines">
+        <svg width="22" height="22"><line x1="0" y1="4" x2="10" y2="4" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/><line x1="4" y1="11" x2="14" y2="11" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/><line x1="0" y1="18" x2="10" y2="18" stroke="#aaa" stroke-width="1.5" stroke-linecap="round"/></svg>
+      </div>
+    </div>
+
+    <a href="index.html" class="go-home">← go home</a>
+  </div>
+
+</div>
+
+<script>
+// cursor
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
+
+// highlight active nav based on current page
+const path = location.pathname;
+if(path.includes('words')) document.getElementById('nav-words')?.classList.add('active');
+if(path.includes('discovery')) document.getElementById('nav-disc')?.classList.add('active');
+if(path.includes('about')) document.getElementById('nav-about')?.classList.add('active');
+
+// sparkle
+const syms=['✦','✧','♡','✿','★','◇'];
+const cols=['#f4a7b9','#c9a6e8','#ffd97d','#a8d8a8','#a8c8e8'];
+document.addEventListener('click', e => {
+  for(let i=0;i<5;i++){
+    const el=document.createElement('span');
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    const a=Math.random()*Math.PI*2,d=28+Math.random()*40;
+    el.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${12+Math.random()*12}px;color:${cols[Math.floor(Math.random()*cols.length)]};pointer-events:none;z-index:99998;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;animation:burst .7s ease forwards;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),700);
+  }
+});
+const s=document.createElement('style');
+s.textContent='@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.3);}}';
+document.head.appendChild(s);
+
+// random zine
+const ZINE_LINKS = [
+  'zines/skincare-routine.html',
+  'zines/check-ingredients.html',
+  'zines/night-routine.html',
+  'zines/empties-diary.html',
+];
+function goRandom() {
+  const r = ZINE_LINKS[Math.floor(Math.random() * ZINE_LINKS.length)];
+  window.location.href = r;
+}
+</script>
+</body>
+</html>
