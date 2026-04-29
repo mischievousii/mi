@@ -148,14 +148,16 @@ h1::before{content:'♡ ';color:#f4a7b9;font-size:36px;vertical-align:middle;}
 .cat-line{height:3px;border-radius:3px;width:56px;margin:6px auto 10px;}
 .cat-desc{font-size:13px;color:#999;line-height:1.5;}
 
-/* ── MAIN 3-COL GRID ── */
+/* ── MAIN GRID: zines full width, ww+disc 2-col below ── */
 .main-grid{
   display:grid;
-  grid-template-columns:1.15fr 1fr 1fr;
+  grid-template-columns:1fr 1fr;
   gap:20px;
   padding:32px 60px 20px;
   position:relative;
 }
+.box-zines{grid-column:1 / -1;}
+.box-ww,.box-disc{grid-column:span 1;}
 
 .box{
   background:white;
@@ -186,7 +188,9 @@ h1::before{content:'♡ ';color:#f4a7b9;font-size:36px;vertical-align:middle;}
 }
 
 /* zine cards row */
-.zine-row{display:flex;gap:10px;}
+.zine-row{display:flex;gap:12px;}
+/* when full width, zine cards can be a bit taller */
+.box-zines .zine-card{min-height:140px;}
 
 .zine-card{
   flex:1;
@@ -305,9 +309,9 @@ footer{
 .cat-card:nth-child(2){animation-delay:.2s;}
 .cat-card:nth-child(3){animation-delay:.28s;}
 .cat-card:nth-child(4){animation-delay:.36s;}
-.box:nth-child(1){animation-delay:.44s;}
-.box:nth-child(2){animation-delay:.52s;}
-.box:nth-child(3){animation-delay:.6s;}
+.box-zines{animation-delay:.44s;}
+.box-ww{animation-delay:.54s;}
+.box-disc{animation-delay:.62s;}
 @keyframes up{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
 
 /* washi tape below main grid */
@@ -325,6 +329,8 @@ footer{
   h1{font-size:34px;}
   .categories,.main-grid{padding-left:20px;padding-right:20px;}
   .main-grid{grid-template-columns:1fr;}
+  .box-zines{grid-column:1;}
+  .box-ww,.box-disc{grid-column:1;}
   footer{padding:10px 20px 30px;grid-template-columns:1fr;}
   .sticky-top{display:none;}
 }
@@ -472,7 +478,7 @@ footer{
   <div style="height:14px;width:60px;border-radius:3px;opacity:.35;background:repeating-linear-gradient(90deg,rgba(201,166,232,.7) 0,rgba(201,166,232,.35) 4px,rgba(201,166,232,.7) 8px);transform:rotate(0.5deg);margin-left:200px;"></div>
 </div>
 
-<!-- ══ MAIN 3-COL ══ -->
+<!-- ══ MAIN: zines full width + ww/disc 2-col ══ -->
 <div class="main-grid">
 
   <!-- LATEST ZINES -->
@@ -480,8 +486,8 @@ footer{
     <div class="box-title">latest zines <svg width="20" height="18" viewBox="0 0 20 18" style="margin-left:2px;"><path d="M5 16 L8 6 L10 12 L13 4 L15 10 L18 2" stroke="#f4a7b9" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
     <div class="zine-row">
 
-      <a href="zines/skincare-routine.html" class="zine-card" style="flex:1;border-radius:10px;padding:14px 10px;position:relative;cursor:none;transition:transform .2s;min-height:120px;display:flex;flex-direction:column;justify-content:space-between;background:linear-gradient(160deg,#ffd6e7,#ffb3c8);text-decoration:none;color:inherit;">
-        <span style="position:absolute;top:8px;right:8px;font-size:10px;background:#2d2d2d;color:white;padding:2px 7px;border-radius:4px;font-weight:800;letter-spacing:.3px;">✦ LIVE</span>
+      <a href="zines/skincare-routine.html" class="zine-card" style="background:linear-gradient(160deg,#ffd6e7,#ffb3c8);text-decoration:none;color:inherit;">
+        <span style="position:absolute;top:8px;left:8px;font-size:9px;background:#2d2d2d;color:white;padding:2px 7px;border-radius:3px;font-weight:800;letter-spacing:.3px;">✦ LIVE</span>
         <div class="zine-title">lazy &amp; affordable skincare routine</div>
         <div class="zine-icon">♡</div>
         <div style="font-size:13px;opacity:.6;text-align:right;">:)</div>
