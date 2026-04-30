@@ -2,10 +2,360 @@
 <html lang="en">
 <head>
 <meta charset="UTF-8">
-<meta http-equiv="refresh" content="0; url=upcoming.html">
-<title>redirecting...</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>about — mischievous playground</title>
+<link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box;}
+
+:root{
+  --bg:#fafaf8;
+  --grid:rgba(200,220,255,.07);
+  --text:#2d2d2d;
+  --text-soft:#555;
+  --text-mute:#aaa;
+  --card:#ffffff;
+  --card-border:rgba(0,0,0,.07);
+  --shadow:rgba(0,0,0,.06);
+  --pink:#f4a7b9;
+  --purple:#c9a6e8;
+  --yellow:#ffd97d;
+  --green:#a8d8a8;
+  --blue:#a8c8e8;
+}
+
+body.dark{
+  --bg:#15131f;
+  --grid:rgba(180,160,220,.05);
+  --text:#f0ebf5;
+  --text-soft:#c9b8d8;
+  --text-mute:#8a7d99;
+  --card:#221f30;
+  --card-border:rgba(255,255,255,.07);
+  --shadow:rgba(0,0,0,.3);
+  --pink:#f8b8c9;
+  --purple:#d9bbf0;
+  --yellow:#ffe09a;
+  --green:#bde6bd;
+  --blue:#bcd4ee;
+}
+
+body{
+  background:var(--bg);
+  font-family:'Indie Flower','Nunito',cursive;
+  color:var(--text);
+  min-height:100vh;
+  overflow-x:hidden;
+  cursor:none;
+  background-image:
+    linear-gradient(var(--grid) 1px,transparent 1px),
+    linear-gradient(90deg,var(--grid) 1px,transparent 1px);
+  background-size:28px 28px;
+  transition:background-color .5s ease,color .5s ease;
+}
+
+#cur{position:fixed;width:20px;height:20px;pointer-events:none;z-index:99999;transform:translate(-50%,-50%);}
+
+/* ── NAV ── */
+nav{
+  display:flex;align-items:center;
+  padding:20px 36px;
+  border-bottom:1px solid rgba(0,0,0,.06);
+  gap:0;position:relative;z-index:10;
+  background:var(--bg);
+  transition:background .5s ease,border-color .5s ease;
+}
+body.dark nav{border-bottom-color:rgba(255,255,255,.08);}
+
+.nav-brand{
+  display:flex;flex-direction:column;
+  text-decoration:none;color:inherit;
+  margin-right:auto;
+}
+.nav-title{
+  font-size:18px;font-weight:800;
+  display:flex;align-items:center;gap:6px;
+  color:var(--text);
+}
+.nav-title span{color:var(--pink);font-size:15px;}
+.nav-sub{font-size:12px;color:var(--text-mute);margin-top:1px;}
+
+.nav-links{display:flex;align-items:center;gap:32px;}
+.nav-links a{
+  font-family:'Indie Flower',cursive;
+  font-size:16px;color:var(--text-soft);text-decoration:none;
+  position:relative;padding-bottom:4px;
+  display:flex;align-items:center;gap:5px;
+}
+.nav-links a::after{
+  content:'';position:absolute;bottom:0;left:0;
+  width:100%;height:2.5px;border-radius:2px;
+  transform:scaleX(0);transition:transform .25s;
+  transform-origin:left;
+}
+.nav-links a.active{color:var(--text);}
+.nav-links a.active::after{transform:scaleX(1);}
+.nav-links a:nth-child(1)::after{background:#f4a7b9;}
+.nav-links a:nth-child(2)::after{background:#a8d8a8;}
+.nav-links a:nth-child(3)::after{background:#a8c8e8;}
+.nav-links a:nth-child(4)::after{background:#c9a6e8;}
+.nav-links a:hover::after{transform:scaleX(1);}
+.nav-links a:hover{color:var(--text);}
+body.dark .nav-links a{color:#c9b8d8;}
+body.dark .nav-links a:hover,
+body.dark .nav-links a.active{color:#fff;}
+
+.nav-right{display:flex;align-items:center;gap:14px;margin-left:32px;}
+
+.sticky-nav{
+  width:115px;background:#fffde7;
+  border:1px solid rgba(0,0,0,.07);
+  padding:10px 12px 14px;
+  box-shadow:2px 3px 8px rgba(0,0,0,.09);
+  transform:rotate(1.5deg);
+  font-size:13px;font-weight:700;color:#666;
+  line-height:1.5;position:relative;
+  transition:transform .2s;cursor:none;
+}
+.sticky-nav::before{
+  content:'';position:absolute;top:-8px;left:10px;
+  width:32px;height:13px;border-radius:2px;
+  background:rgba(201,166,232,.5);
+}
+.sticky-nav:hover{transform:rotate(0deg) scale(1.04);}
+.sticky-nav .arr{color:#f4a7b9;font-size:16px;display:block;margin-top:4px;}
+body.dark .sticky-nav{background:#3a3520;border-color:rgba(255,255,255,.08);color:#d8c997;}
+
+.nav-circle{
+  width:30px;height:30px;border:2px solid #ccc;border-radius:50%;
+  display:flex;align-items:center;justify-content:center;
+  font-size:14px;color:#ccc;transition:transform .3s,border-color .3s;
+}
+.nav-circle:hover{transform:rotate(20deg);border-color:#f4a7b9;color:#f4a7b9;}
+body.dark .nav-circle{border-color:#5a4a72;color:#8a7d99;}
+
+/* torn line under nav */
+.torn-line{
+  height:18px;
+  background:var(--card);
+  clip-path:polygon(0 0,100% 0,100% 55%,99% 70%,98% 55%,97% 72%,96% 56%,95% 73%,94% 57%,93% 74%,92% 58%,91% 75%,90% 59%,89% 76%,88% 60%,87% 77%,86% 61%,85% 78%,84% 62%,83% 79%,82% 63%,81% 80%,80% 64%,79% 81%,78% 65%,77% 82%,76% 66%,75% 83%,74% 67%,73% 84%,72% 68%,71% 85%,70% 69%,69% 86%,68% 70%,67% 87%,66% 71%,65% 88%,64% 72%,63% 89%,62% 73%,61% 90%,60% 74%,59% 91%,58% 75%,57% 92%,56% 76%,55% 93%,54% 77%,53% 94%,52% 78%,51% 95%,50% 79%,49% 96%,48% 80%,47% 95%,46% 79%,45% 96%,44% 80%,43% 95%,42% 79%,41% 96%,40% 80%,39% 95%,38% 79%,37% 96%,36% 80%,35% 95%,34% 79%,33% 96%,32% 80%,31% 95%,30% 79%,29% 96%,28% 80%,27% 95%,26% 79%,25% 96%,24% 80%,23% 95%,22% 79%,21% 96%,20% 80%,19% 95%,18% 79%,17% 96%,16% 80%,15% 95%,14% 79%,13% 96%,12% 80%,11% 95%,10% 79%,9% 96%,8% 80%,7% 95%,6% 79%,5% 96%,4% 80%,3% 95%,2% 79%,1% 96%,0 80%);
+  margin-bottom:0;
+  border-bottom:1px solid rgba(0,0,0,.05);
+  transition:background .5s ease;
+}
+body.dark .torn-line{background:#15131f;border-bottom-color:rgba(255,255,255,.08);}
+
+/* ══════ HERO IMAGE ══════ */
+.hero-wrap{
+  max-width:1100px;
+  margin:36px auto 0;
+  padding:0 24px;
+  position:relative;
+}
+.hero-board{
+  position:relative;
+  border-radius:24px;
+  overflow:hidden;
+  box-shadow:0 20px 40px rgba(0,0,0,.08);
+  transition:transform .3s ease,box-shadow .4s ease;
+  background:var(--card);
+}
+.hero-board:hover{
+  transform:translateY(-4px);
+  box-shadow:0 24px 48px rgba(0,0,0,.12);
+}
+body.dark .hero-board{box-shadow:0 20px 40px rgba(0,0,0,.4);}
+body.dark .hero-board:hover{box-shadow:0 24px 48px rgba(0,0,0,.55);}
+
+.hero-img{
+  width:100%;
+  display:block;
+  opacity:0;
+  transition:opacity .5s ease;
+}
+.hero-img.active{opacity:1;position:relative;}
+.hero-img:not(.active){position:absolute;inset:0;}
+
+/* tape decoration on hero */
+.hero-tape{
+  position:absolute;top:-10px;left:50%;transform:translateX(-50%) rotate(-1deg);
+  width:120px;height:22px;border-radius:3px;
+  background:repeating-linear-gradient(90deg,rgba(244,167,185,.55) 0,rgba(244,167,185,.3) 4px,rgba(244,167,185,.55) 8px);
+  z-index:2;
+  box-shadow:0 2px 6px rgba(0,0,0,.06);
+}
+
+/* ══════ MUSIC EMBED ══════ */
+.music{
+  max-width:420px;
+  margin:40px auto 0;
+  padding:8px;
+  border-radius:16px;
+  background:transparent;
+  box-shadow:0 10px 30px rgba(0,0,0,.06);
+  transition:transform .2s ease,box-shadow .4s ease;
+}
+.music:hover{
+  transform:translateY(-2px);
+  box-shadow:0 14px 34px rgba(0,0,0,.09);
+}
+body.dark .music{
+  box-shadow:0 10px 30px rgba(0,0,0,.4);
+}
+body.dark .music:hover{
+  box-shadow:0 14px 34px rgba(0,0,0,.5);
+}
+.music iframe{
+  display:block;
+  border-radius:12px;
+  width:100%;
+}
+
+.music-label{
+  text-align:center;
+  font-size:14px;font-weight:700;
+  color:var(--text-mute);
+  margin:30px auto 0;
+  display:flex;align-items:center;justify-content:center;gap:8px;
+}
+.music-label .deco{color:var(--purple);}
+
+/* ══════ FOOTER NOTE ══════ */
+.bottom-note{
+  text-align:center;
+  font-size:13px;color:var(--text-mute);
+  padding:50px 20px 40px;
+  font-weight:600;
+}
+.bottom-note .heart{color:var(--pink);}
+
+/* ── entrance ── */
+.hero-wrap,.music,.music-label{opacity:0;animation:fadeUp .6s ease forwards;}
+.hero-wrap{animation-delay:.1s;}
+.music-label{animation-delay:.25s;}
+.music{animation-delay:.35s;}
+@keyframes fadeUp{from{opacity:0;transform:translateY(14px);}to{opacity:1;transform:translateY(0);}}
+
+/* responsive */
+@media(max-width:768px){
+  nav{padding:16px 18px;flex-wrap:wrap;gap:12px;}
+  .nav-brand{margin-right:0;}
+  .nav-links{gap:18px;order:3;width:100%;justify-content:flex-start;flex-wrap:wrap;}
+  .nav-right{margin-left:auto;}
+  .sticky-nav{display:none;}
+  .hero-wrap{margin-top:20px;padding:0 14px;}
+  .music{max-width:94%;margin-top:30px;}
+}
+</style>
 </head>
 <body>
-<script>window.location.replace("upcoming.html");</script>
+
+<div id="cur">
+  <svg viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="4.5" fill="#f4a7b9" opacity=".9"/><circle cx="10" cy="10" r="8" stroke="#f4a7b9" stroke-width="1.4" opacity=".35"/></svg>
+</div>
+
+<!-- ── NAV ── -->
+<nav>
+  <a href="index.html" class="nav-brand">
+    <div class="nav-title">mischievous playground <span>♡</span></div>
+    <div class="nav-sub">small things i'm figuring out</div>
+  </a>
+
+  <div class="nav-links">
+    <a href="zines.html">scraps</a>
+    <a href="discovery.html">lens</a>
+    <a href="words.html">words</a>
+    <a href="about.html" class="active">
+      about
+      <svg width="16" height="16" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,11.5 3.5,15 5,9.5 1,6 6,6" stroke="#c9a6e8" stroke-width="1.5" fill="none"/></svg>
+    </a>
+  </div>
+
+  <div class="nav-right">
+    <div class="sticky-nav">
+      hi, i'm<br>here ✿
+      <span class="arr">↓</span>
+    </div>
+    <div class="nav-circle">:)</div>
+  </div>
+</nav>
+
+<!-- torn edge -->
+<div class="torn-line"></div>
+
+<!-- ── HERO IMAGE ── -->
+<div class="hero-wrap">
+  <div class="hero-tape"></div>
+  <div class="hero-board">
+    <img class="hero-img active" id="heroLight"
+         src="https://res.cloudinary.com/djenzu1lm/image/upload/v1777484010/about_me_ta3kty.png"
+         alt="about me">
+    <img class="hero-img" id="heroDark"
+         src="https://res.cloudinary.com/djenzu1lm/image/upload/v1777521745/about-dark_wl8pel.png"
+         alt="about me — dark">
+  </div>
+</div>
+
+<!-- ── MUSIC LABEL ── -->
+<div class="music-label">
+  <span class="deco">✦</span> currently on loop <span class="deco">✦</span>
+</div>
+
+<!-- ── SPOTIFY EMBED ── -->
+<div class="music">
+  <iframe data-testid="embed-iframe"
+          style="border-radius:12px"
+          src="https://open.spotify.com/embed/playlist/3UQHLNGqibXITdhLSBF2TD?utm_source=generator&theme=0"
+          width="100%" height="352"
+          frameBorder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"></iframe>
+</div>
+
+<!-- ── BOTTOM NOTE ── -->
+<div class="bottom-note">
+  thanks for stopping by <span class="heart">♡</span>
+</div>
+
+<script>
+/* ── cursor ── */
+const cur = document.getElementById('cur');
+document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur.style.top=e.clientY+'px'; });
+
+/* ── click sparkle ── */
+const syms=['✦','✧','♡','✿','★','◇','☆'];
+const cols=['#f4a7b9','#c9a6e8','#ffd97d','#a8d8a8','#a8c8e8'];
+document.addEventListener('click', e => {
+  for(let i=0;i<6;i++){
+    const el=document.createElement('span');
+    el.textContent=syms[Math.floor(Math.random()*syms.length)];
+    const a=Math.random()*Math.PI*2, d=30+Math.random()*45;
+    el.style.cssText=`position:fixed;left:${e.clientX}px;top:${e.clientY}px;font-size:${12+Math.random()*12}px;color:${cols[Math.floor(Math.random()*cols.length)]};pointer-events:none;z-index:99998;--tx:${Math.cos(a)*d}px;--ty:${Math.sin(a)*d}px;animation:burst .7s ease forwards;`;
+    document.body.appendChild(el);
+    setTimeout(()=>el.remove(),700);
+  }
+});
+const s=document.createElement('style');
+s.textContent='@keyframes burst{0%{opacity:1;transform:translate(0,0) scale(1);}100%{opacity:0;transform:translate(var(--tx),var(--ty)) scale(.3);}}';
+document.head.appendChild(s);
+
+/* ── HERO IMAGE SWAP — listens to theme.js event ── */
+const heroLight = document.getElementById('heroLight');
+const heroDark  = document.getElementById('heroDark');
+function syncHero(){
+  const isDark = document.body.classList.contains('dark');
+  if(isDark){
+    heroLight.classList.remove('active');
+    heroDark.classList.add('active');
+  }else{
+    heroDark.classList.remove('active');
+    heroLight.classList.add('active');
+  }
+}
+syncHero();
+document.addEventListener('mp-theme-change', syncHero);
+</script>
+<script src="theme.js"></script>
 </body>
 </html>
