@@ -339,7 +339,7 @@ body.dark .go-home:hover{color:#f8b8c9;}
   </a>
   <div class="nav-links">
     <a href="zines.html">scraps</a>
-    <a href="discovery.html" id="nav-disc">lens</a>
+    <a href="lens.html" id="nav-disc">lens</a>
     <a href="words.html" id="nav-words">words</a>
     <a href="about.html" id="nav-about">about</a>
   </div>
@@ -466,7 +466,7 @@ document.addEventListener('mousemove', e => { cur.style.left=e.clientX+'px'; cur
 // highlight active nav based on current page
 const path = location.pathname;
 if(path.includes('words')) document.getElementById('nav-words')?.classList.add('active');
-if(path.includes('discovery')) document.getElementById('nav-disc')?.classList.add('active');
+if(path.includes('lens')) document.getElementById('nav-disc')?.classList.add('active');
 if(path.includes('about')) document.getElementById('nav-about')?.classList.add('active');
 
 // sparkle
