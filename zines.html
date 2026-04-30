@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>zines — mischievous playground</title>
+<title>scraps — mischievous playground</title>
 <link href="https://fonts.googleapis.com/css2?family=Indie+Flower&family=Nunito:wght@400;600;700;800&display=swap" rel="stylesheet">
 <style>
 *{margin:0;padding:0;box-sizing:border-box;}
@@ -60,8 +60,8 @@ nav{
 .nav-links a.active{color:#222;}
 .nav-links a.active::after{transform:scaleX(1);}
 .nav-links a:nth-child(1)::after{background:#f4a7b9;}
-.nav-links a:nth-child(2)::after{background:#a8c8e8;}
-.nav-links a:nth-child(3)::after{background:#a8d8a8;}
+.nav-links a:nth-child(2)::after{background:#a8d8a8;}
+.nav-links a:nth-child(3)::after{background:#a8c8e8;}
 .nav-links a:nth-child(4)::after{background:#c9a6e8;}
 .nav-links a:hover::after{transform:scaleX(1);}
 .nav-links a:hover{color:#222;}
@@ -406,11 +406,11 @@ nav{
 
   <div class="nav-links">
     <a href="zines.html" class="active">
-      zines
+      scraps
       <svg width="16" height="16" viewBox="0 0 16 16"><polygon points="8,1 10,6 15,6 11,9.5 12.5,15 8,11.5 3.5,15 5,9.5 1,6 6,6" stroke="#f4a7b9" stroke-width="1.5" fill="none"/></svg>
     </a>
-    <a href="words.html">word world</a>
-    <a href="discovery.html">discovery</a>
+    <a href="discovery.html">lens</a>
+    <a href="words.html">words</a>
     <a href="about.html">about</a>
   </div>
 
@@ -516,12 +516,12 @@ nav{
     <div class="zines-hero">
       <div class="hero-row">
         <div class="hero-left">
-          <h1>zines <span class="heart">♡</span></h1>
+          <h1>scraps <span class="heart">♡</span></h1>
           <p class="hero-sub">my little books about things i love</p>
         </div>
         <div class="search-wrap">
           <svg width="16" height="16" viewBox="0 0 16 16"><circle cx="7" cy="7" r="5" stroke="#aaa" stroke-width="1.8" fill="none"/><line x1="11" y1="11" x2="15" y2="15" stroke="#aaa" stroke-width="2" stroke-linecap="round"/></svg>
-          <input type="text" id="search" placeholder="search zines...">
+          <input type="text" id="search" placeholder="search scraps...">
         </div>
       </div>
       <!-- doodle lines -->
@@ -552,7 +552,7 @@ nav{
 <script>
 // ── ZINE DATA ── edit here to add/update zines
 const ZINES = [
-  { id:1, title:"lazy & affordable skincare routine", date:"may 18, 2024", tags:["skincare","routine","lazy"], isNew:true, live:true, cover:"https://res.cloudinary.com/djenzu1lm/image/upload/v1777482687/1_xdysy3.png", bg:"linear-gradient(160deg,#ffd6e0,#ffc2ce)", icon:"♡", link:"zines/skincare-routine.html" },
+  { id:1, title:"lazy & affordable skincare routine", date:"may 18, 2024", tags:["skincare","routine","lazy"], isNew:true, live:true, cover:"https://res.cloudinary.com/djenzu1lm/image/upload/v1777475340/a_e8vbyt.png", bg:"linear-gradient(160deg,#ffd6e0,#ffc2ce)", icon:"♡", link:"zines/skincare-routine.html" },
   { id:2, title:"how i check ingredients", date:"may 10, 2024", tags:["ingredient","learning"], isNew:false, live:false, cover:null, bg:"linear-gradient(160deg,#e8d8f8,#d4b8f0)", icon:"🔍", link:"upcoming.html" },
   { id:3, title:"night routine", date:"may 02, 2024", tags:["routine","skincare","night"], isNew:false, live:false, cover:null, bg:"linear-gradient(160deg,#fff8dc,#ffe89a)", icon:"🌙", link:"upcoming.html" },
   { id:4, title:"empties diary", date:"apr 28, 2024", tags:["empties","skincare","review"], isNew:true, live:false, cover:null, bg:"linear-gradient(160deg,#d8f0e8,#b8e4d0)", icon:"💛", link:"upcoming.html" },
@@ -635,7 +635,7 @@ function renderZines() {
 
   const grid = document.getElementById('grid');
   if(!list.length) {
-    grid.innerHTML = '<div class="no-results">no zines found ✦ try another tag!</div>';
+    grid.innerHTML = '<div class="no-results">no scraps found ✦ try another tag!</div>';
     return;
   }
 

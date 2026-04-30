@@ -253,8 +253,8 @@ body.dark .toggle .orb::after{opacity:1;}
   width:50px;height:16px;border-radius:2px;opacity:.55;
 }
 .box-zines::before{background:repeating-linear-gradient(90deg,rgba(244,167,185,.6) 0,rgba(244,167,185,.3) 4px,rgba(244,167,185,.6) 8px);}
-.box-ww::before{background:repeating-linear-gradient(90deg,rgba(168,216,168,.6) 0,rgba(168,216,168,.3) 4px,rgba(168,216,168,.6) 8px);}
-.box-disc::before{background:repeating-linear-gradient(90deg,rgba(201,166,232,.6) 0,rgba(201,166,232,.3) 4px,rgba(201,166,232,.6) 8px);}
+.box-ww::before{background:repeating-linear-gradient(90deg,rgba(168,200,232,.6) 0,rgba(168,200,232,.3) 4px,rgba(168,200,232,.6) 8px);}
+.box-disc::before{background:repeating-linear-gradient(90deg,rgba(168,216,168,.6) 0,rgba(168,216,168,.3) 4px,rgba(168,216,168,.6) 8px);}
 
 .box-title{
   font-size:19px;font-weight:800;
@@ -298,8 +298,8 @@ body.dark .soon-overlay-sm{background:rgba(34,31,48,.78);color:#bbb;}
   gap:8px;
 }
 .list-item:last-child{border-bottom:none;}
-.list-item:hover{color:var(--green);}
-.list-item.disc-item:hover{color:var(--purple);}
+.list-item.ww-item:hover{color:var(--blue);}
+.list-item.disc-item:hover{color:var(--green);}
 
 .li-dot{width:8px;height:8px;border-radius:50%;flex-shrink:0;}
 .li-txt{flex:1;font-weight:600;}
@@ -485,9 +485,22 @@ body.dark .pink-bar{background:rgba(248,184,201,.18);}
           <path d="M22 18 Q29 16 36 18" stroke="#f4a7b9" stroke-width="1.5" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
-      <span class="cat-name">zines</span>
+      <span class="cat-name">scraps</span>
       <div class="cat-line" style="background:#f4a7b9;"></div>
       <p class="cat-desc">my little books</p>
+    </a>
+
+    <a href="discovery.html" class="cat-card">
+      <div class="cat-icon">
+        <svg width="42" height="40" viewBox="0 0 42 40" fill="none">
+          <circle cx="18" cy="18" r="13" stroke="#a8d8a8" stroke-width="2.2" fill="none"/>
+          <line x1="27" y1="27" x2="38" y2="38" stroke="#a8d8a8" stroke-width="2.5" stroke-linecap="round"/>
+          <circle cx="18" cy="18" r="6" stroke="#a8d8a8" stroke-width="1.5" fill="none"/>
+        </svg>
+      </div>
+      <span class="cat-name">lens</span>
+      <div class="cat-line" style="background:#a8d8a8;"></div>
+      <p class="cat-desc">things i learn & explore</p>
     </a>
 
     <a href="words.html" class="cat-card">
@@ -500,22 +513,9 @@ body.dark .pink-bar{background:rgba(248,184,201,.18);}
           <path d="M12 24 Q20 30 28 24" stroke="#a8c8e8" stroke-width="2" fill="none" stroke-linecap="round"/>
         </svg>
       </div>
-      <span class="cat-name">word world</span>
+      <span class="cat-name">words</span>
       <div class="cat-line" style="background:#a8c8e8;"></div>
       <p class="cat-desc">thoughts, notes & stories</p>
-    </a>
-
-    <a href="discovery.html" class="cat-card">
-      <div class="cat-icon">
-        <svg width="42" height="40" viewBox="0 0 42 40" fill="none">
-          <circle cx="18" cy="18" r="13" stroke="#a8d8a8" stroke-width="2.2" fill="none"/>
-          <line x1="27" y1="27" x2="38" y2="38" stroke="#a8d8a8" stroke-width="2.5" stroke-linecap="round"/>
-          <circle cx="18" cy="18" r="6" stroke="#a8d8a8" stroke-width="1.5" fill="none"/>
-        </svg>
-      </div>
-      <span class="cat-name">discovery</span>
-      <div class="cat-line" style="background:#a8d8a8;"></div>
-      <p class="cat-desc">things i learn & explore</p>
     </a>
 
     <a href="about.html" class="cat-card">
@@ -543,9 +543,9 @@ body.dark .pink-bar{background:rgba(248,184,201,.18);}
   <!-- ══ MAIN GRID ══ -->
   <div class="main-grid">
 
-    <!-- LATEST ZINES -->
+    <!-- LATEST SCRAPS -->
     <div class="box box-zines">
-      <div class="box-title">latest zines <svg width="20" height="18" viewBox="0 0 20 18" style="margin-left:2px;"><path d="M5 16 L8 6 L10 12 L13 4 L15 10 L18 2" stroke="#f4a7b9" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+      <div class="box-title">latest scraps <svg width="20" height="18" viewBox="0 0 20 18" style="margin-left:2px;"><path d="M5 16 L8 6 L10 12 L13 4 L15 10 L18 2" stroke="#f4a7b9" stroke-width="1.8" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
       <div class="zine-row">
 
         <a href="zines/skincare-routine.html" class="zine-card">
@@ -578,41 +578,41 @@ body.dark .pink-bar{background:rgba(248,184,201,.18);}
         </a>
 
       </div>
-      <a href="zines.html" style="display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:#f4a7b9;text-decoration:none;border-bottom:1.5px dashed #f4a7b9;">view all zines →</a>
+      <a href="zines.html" style="display:inline-block;margin-top:14px;font-size:14px;font-weight:700;color:#f4a7b9;text-decoration:none;border-bottom:1.5px dashed #f4a7b9;">view all scraps →</a>
     </div>
 
-    <!-- WORD WORLD -->
-    <div class="box box-ww">
-      <div class="box-title">
-        word world
-        <span class="title-star" style="margin-left:auto;">
-          <svg width="22" height="22"><polygon points="11,2 13.5,8 20,8 15,12 17,19 11,15 5,19 7,12 2,8 8.5,8" stroke="#a8d8a8" stroke-width="1.8" fill="none"/></svg>
-        </span>
-      </div>
-
-      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">lessons from my morning pages</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">quotes that stay with me</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">a soft reminder for today</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">slow living, in my way</span><span class="li-arr">→</span></a>
-
-      <a href="words.html" class="see-all" style="color:#a8c8e8;border-bottom:1.5px dashed #a8c8e8;">see all articles →</a>
-    </div>
-
-    <!-- DISCOVERY -->
+    <!-- LENS -->
     <div class="box box-disc">
       <div class="box-title">
-        discovery
+        lens
         <span class="title-star" style="margin-left:auto;">
           <svg width="22" height="22"><circle cx="11" cy="11" r="7" stroke="#a8d8a8" stroke-width="1.8" fill="none"/><line x1="16" y1="16" x2="21" y2="21" stroke="#a8d8a8" stroke-width="2" stroke-linecap="round"/><circle cx="11" cy="11" r="3" stroke="#a8d8a8" stroke-width="1.5" fill="none"/></svg>
         </span>
       </div>
 
-      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#c9a6e8;"></span><span class="li-txt">how to read ingredient lists</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#c9a6e8;"></span><span class="li-txt">japanese recycling labels guide</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#c9a6e8;"></span><span class="li-txt">comedogenic rating explained</span><span class="li-arr">→</span></a>
-      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#c9a6e8;"></span><span class="li-txt">gentle skincare ingredients 101</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">how to read ingredient lists</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">japanese recycling labels guide</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">comedogenic rating explained</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item disc-item"><span class="li-dot" style="background:#a8d8a8;"></span><span class="li-txt">gentle skincare ingredients 101</span><span class="li-arr">→</span></a>
 
       <a href="discovery.html" class="see-all" style="color:#a8d8a8;border-bottom:1.5px dashed #a8d8a8;">explore more →</a>
+    </div>
+
+    <!-- WORDS -->
+    <div class="box box-ww">
+      <div class="box-title">
+        words
+        <span class="title-star" style="margin-left:auto;">
+          <svg width="22" height="22"><polygon points="11,2 13.5,8 20,8 15,12 17,19 11,15 5,19 7,12 2,8 8.5,8" stroke="#a8c8e8" stroke-width="1.8" fill="none"/></svg>
+        </span>
+      </div>
+
+      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8c8e8;"></span><span class="li-txt">lessons from my morning pages</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8c8e8;"></span><span class="li-txt">quotes that stay with me</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8c8e8;"></span><span class="li-txt">a soft reminder for today</span><span class="li-arr">→</span></a>
+      <a href="#" class="list-item ww-item"><span class="li-dot" style="background:#a8c8e8;"></span><span class="li-txt">slow living, in my way</span><span class="li-arr">→</span></a>
+
+      <a href="words.html" class="see-all" style="color:#a8c8e8;border-bottom:1.5px dashed #a8c8e8;">see all articles →</a>
     </div>
 
   </div>
