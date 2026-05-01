@@ -120,3 +120,54 @@
     localStorage.setItem('mp-theme', next);
   });
 })();
+
+// ── Cinnamoroll skating mascot ──
+(function(){
+  const GIF = 'https://res.cloudinary.com/djenzu1lm/image/upload/v1777612581/cinnamoroll_n7iuee.gif';
+  const H   = 88;                          // height px
+  const W   = Math.round(H * 310 / 326);  // ~84px, keep aspect ratio
+  const SPD = 140;                         // px/s
+
+  const el = document.createElement('img');
+  el.src = GIF;
+  el.setAttribute('aria-hidden', 'true');
+  el.style.cssText = [
+    'position:fixed',
+    'bottom:-6px',
+    `height:${H}px`,
+    'width:auto',
+    'z-index:8500',
+    'pointer-events:none',
+    'user-select:none',
+    '-webkit-user-drag:none',
+    'image-rendering:auto',
+    'will-change:transform',
+  ].join(';');
+  document.body.appendChild(el);
+
+  let x     = -W;   // start off-screen left
+  let dir   = 1;    // 1 = right, -1 = left
+  let last  = null;
+
+  function tick(ts) {
+    if (!last) last = ts;
+    const dt = Math.min((ts - last) / 1000, 0.05); // cap dt to avoid jump after tab switch
+    last = ts;
+
+    x += dir * SPD * dt;
+
+    const maxX = window.innerWidth;
+    if (dir === 1 && x > maxX) {
+      dir = -1;
+    } else if (dir === -1 && x < -W) {
+      dir = 1;
+    }
+
+    // scaleX flips character to face direction of travel
+    el.style.transform = `translateX(${x}px) scaleX(${dir})`;
+    requestAnimationFrame(tick);
+  }
+
+  // wait for page load so layout is stable
+  window.addEventListener('load', () => requestAnimationFrame(tick));
+})();
