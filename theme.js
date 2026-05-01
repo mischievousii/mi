@@ -124,50 +124,64 @@
 // ── Cinnamoroll skating mascot ──
 (function(){
   const GIF = 'https://res.cloudinary.com/djenzu1lm/image/upload/v1777612581/cinnamoroll_n7iuee.gif';
-  const H   = 88;                          // height px
-  const W   = Math.round(H * 310 / 326);  // ~84px, keep aspect ratio
-  const SPD = 140;                         // px/s
+  const H   = 88;
+  const W   = Math.round(H * 310 / 326); // ~84px
 
   const el = document.createElement('img');
   el.src = GIF;
   el.setAttribute('aria-hidden', 'true');
   el.style.cssText = [
     'position:fixed',
-    'bottom:-6px',
+    'left:0','top:0',
     `height:${H}px`,
     'width:auto',
     'z-index:8500',
     'pointer-events:none',
     'user-select:none',
     '-webkit-user-drag:none',
-    'image-rendering:auto',
     'will-change:transform',
   ].join(';');
   document.body.appendChild(el);
 
-  let x     = -W;   // start off-screen left
-  let dir   = 1;    // 1 = right, -1 = left
-  let last  = null;
+  // start off-screen right, heading left
+  const SPD = 130; // total speed px/s
+  let x  = window.innerWidth + W;
+  let y  = window.innerHeight * 0.55;
+  let vx = -SPD;
+  let vy = (Math.random() - 0.5) * SPD * 0.7; // random vertical angle
+  let last = null;
+  let nextSwerve = 3000 + Math.random() * 4000; // ms until next random swerve
 
   function tick(ts) {
     if (!last) last = ts;
-    const dt = Math.min((ts - last) / 1000, 0.05); // cap dt to avoid jump after tab switch
+    const dt  = Math.min((ts - last) / 1000, 0.05);
     last = ts;
+    nextSwerve -= dt * 1000;
 
-    x += dir * SPD * dt;
-
-    const maxX = window.innerWidth;
-    if (dir === 1 && x > maxX) {
-      dir = -1;
-    } else if (dir === -1 && x < -W) {
-      dir = 1;
+    // occasional random swerve — keeps movement feeling alive
+    if (nextSwerve <= 0) {
+      vy += (Math.random() - 0.5) * SPD * 0.8;
+      // clamp vy so it never goes fully vertical
+      vy = Math.max(-SPD * 0.7, Math.min(SPD * 0.7, vy));
+      nextSwerve = 2500 + Math.random() * 4000;
     }
 
-    // scaleX flips character to face direction of travel
-    el.style.transform = `translateX(${x}px) scaleX(${dir})`;
+    x += vx * dt;
+    y += vy * dt;
+
+    const maxX = window.innerWidth  - W;
+    const maxY = window.innerHeight - H;
+
+    if (x < 0)    { x = 0;    vx =  Math.abs(vx); }
+    if (x > maxX) { x = maxX; vx = -Math.abs(vx); }
+    if (y < 0)    { y = 0;    vy =  Math.abs(vy); }
+    if (y > maxY) { y = maxY; vy = -Math.abs(vy); }
+
+    // face the horizontal direction of travel
+    const flip = vx < 0 ? -1 : 1;
+    el.style.transform = `translate(${x}px,${y}px) scaleX(${flip})`;
     requestAnimationFrame(tick);
   }
 
-  // wait for page load so layout is stable
   window.addEventListener('load', () => requestAnimationFrame(tick));
 })();
